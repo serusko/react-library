@@ -1,9 +1,7 @@
-import React from 'react';
+import Permission from './Permission';
+import Provider, { getPermission } from './Provider';
+import Context, { usePermission, usePermissions } from './Context';
 
-interface Props {
-  text: string;
-}
+export default Provider;
 
-export const ExampleComponent = ({ text }: Props) => {
-  return <div>Example Component: {text}</div>;
-};
+export { Context, Permission, usePermission, usePermissions, getPermission };
