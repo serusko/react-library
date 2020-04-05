@@ -1,0 +1,60 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "typescript.validate.enable": true,
+    "javascript.validate.enable": true,
+    "flow.enabled": false,
+
+    // Eslint
+    "eslint.options": {
+      "configFile": "./.eslintrc"
+    },
+    "eslint.alwaysShowStatus": true,
+    "eslint.packageManager": "yarn",
+    "eslint.enable": true,
+    // Editor goodies
+    "files.defaultLanguage": "javascriptreact",
+    "editor.rulers": [100],
+    "files.associations": {
+      "*.js": "javascriptreact"
+    },
+    // search
+    "search.exclude": {
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/build": true
+    },
+    // Hide
+    "files.exclude": {
+      "node_modules": true,
+      ".prettierrc": true,
+      ".travis.yml": true,
+      ".gitignore": true,
+      ".eslintrc.js": true,
+      ".eslintignore": true,
+      "tsconfig.json": true,
+      "tsconfig.test.json": true,
+      ".editorconfig": true,
+      "yarn.lock": true
+    },
+    // Prettier
+    "editor.formatOnSave": true,
+    "npm-scripts.showStartNotification": false,
+
+    // Force ine ending's
+    "files.eol": "\n",
+    "git.ignoreLimitWarning": true
+  },
+  // Recommended plugins
+  "extensions": {
+    "recommendations": [
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "editorconfig.editorconfig"
+    ]
+  }
+}
