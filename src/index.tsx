@@ -1,7 +1,7 @@
 import Permission from './Permission';
 import Provider, { getPermission } from './Provider';
-import Context, { usePermission, usePermissions } from './Context';
+import Context, { usePermission, useGetPermission } from './Context';
 
 export default Provider;
 
-export { Context, Permission, usePermission, usePermissions, getPermission };
+export { Context, Permission, usePermission, useGetPermission, getPermission };

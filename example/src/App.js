@@ -1,35 +1,50 @@
 import React, { useCallback } from 'react';
 
-import Provider, { Permission, usePermission } from '@react-library/permissions';
+import Provider, {
+  Permission,
+  usePermission,
+  getPermission,
+  useGetPermission,
+} from '@react-library/permissions';
 
 const App = () => {
   const res = useCallback(q => {
-    console.log('q', q, q === 'index');
-    return q === 'index';
+    return q === 'read'; // enable only read "enum"
   }, []);
 
+  const trackedGetPermission = useGetPermission();
+
   return (
-    <Provider resolver={res} fallback={<p>Index content is hidden</p>}>
-      <Permission q="index">
-        <p>Visible Index permission</p>
-      </Permission>
-
-      <Permission q="another" fallback={<p>Another content is hidden</p>}>
-        <p>Visible Another permission</p>
-      </Permission>
-
-      <HookExample />
-    </Provider>
+    <div style={{ padding: '1rem' }}>
+      <Provider resolver={res} fallback={<p>read content is hidden</p>}>
+        {/* Enabled "read" permission content */}
+        <Permission q="read">
+          <p>Visible read permission</p>
+        </Permission>
+        {/* Disabled "write" permission content */}
+        <Permission q="write" fallback={<p>write content is hidden</p>}>
+          <p>Visible write permission</p>
+        </Permission>
+        {/* Hook values example */}
+        <HookExample />
+        {/* Global Ref resolver */}
+        Permissions map:{' '}
+        {['read', 'write'].map(i => `${i} = ${trackedGetPermission(i) ? 1 : 0}`).join(', ')}
+        <br />
+        <button onClick={() => alert(getPermission('read'))}>Eval read permission</button>
+      </Provider>
+    </div>
   );
 };
 
 const HookExample = () => {
-  const hasIndexParmission = usePermission('index');
-  const hasAnotherParmission = usePermission('another');
+  const hasReadPermission = usePermission('read');
+  const hasWritePermission = usePermission('write');
+
   return (
     <>
-      <p>hasIndexParmission: {hasIndexParmission ? 1 : 0}</p>
-      <p>hasAnotherParmission: {hasAnotherParmission ? 1 : 0}</p>
+      <p>hasReadPermission: {hasReadPermission ? 1 : 0}</p>
+      <p>hasWritePermission: {hasWritePermission ? 1 : 0}</p>
     </>
   );
 };

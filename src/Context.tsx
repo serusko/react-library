@@ -15,9 +15,9 @@ export default Context;
  * Custom permission hook to track and evaluate specific permission
  *
  * Query permission
- * @param {Array<string>} queries
+ * @param {string} query
  * Returns permission availability
- * @returns {Object{[query: string]: boolean}
+ * @returns {boolean}
  */
 export const usePermission = (query: string) => {
   const useStateValue = useRef<boolean>(false);
@@ -32,31 +32,21 @@ export const usePermission = (query: string) => {
 
     const v = resolver(query);
 
-    console.log(query, v);
-
     if (typeof v === 'boolean') {
       return v;
-    } else {
-      useStateValue.current = false;
+    } else if (v && v.then) {
+      useStateValue.current = true;
       v.then(setValue);
-      return false;
     }
+    return false;
   }, [query, resolver, setValue]);
 };
 
 /**
- * Custom permission hook to track and evaluate multiple permissions
+ * Custom permission hook - return resolver reference
  *
- * Query multiple permissions
- * @param {Array<string>} queries
- * Returns map with resolved permissions
- * @returns {Object{[query: string]: boolean}
+ * @returns {void}
  */
-export const usePermissions = (queries: string[]) => {
-  // TODO: support async
-  const resolver = useContext(Context);
-  return useMemo(() => queries.reduce((acc, q) => ({ ...acc, [q]: resolver(q) }), {}), [
-    resolver,
-    JSON.stringify(queries), // track deep changes
-  ]);
+export const useGetPermission = () => {
+  return useContext(Context);
 };
