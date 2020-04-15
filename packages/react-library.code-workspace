@@ -29,7 +29,7 @@
       "**/build": true
     },
     // Hide
-    "files.exclude": {
+    "files.excludes": {
       "node_modules": true,
       ".prettierrc": true,
       ".travis.yml": true,
