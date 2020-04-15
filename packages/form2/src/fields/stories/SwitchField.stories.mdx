@@ -1,0 +1,15 @@
+import { action } from '@storybook/addon-actions';
+import { withKnobs } from '@storybook/addon-knobs';
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+
+import { Component } from '../SwitchField.tsx';
+
+<Meta title="Form fields" component={ Component } />
+
+<Preview withToolbar>
+  <Story name="Switch Field" parameters={ { decorators: [ withKnobs ] } }>
+    <Component />
+  </Story>
+</Preview>
+
+<Props of={ Component } />
